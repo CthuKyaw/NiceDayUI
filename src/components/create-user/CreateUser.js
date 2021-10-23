@@ -12,6 +12,7 @@ import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { useAuth } from '../../context/auth-context';
 import { userValidationSchema } from '../../validations/user-validation';
+import notiSound from '../../sounds/notification-sound.wav';
 
 export default function CreateUser() {
 
@@ -25,7 +26,7 @@ export default function CreateUser() {
 
 
     const [role, setRole] = useState("2");
-    const [msg, setMsg] = useState("");
+    const [msg, setMessage] = useState("");
     const [reqStatus, setReqStatus] = useState(false);
     const [loggedInUserRole, setLoggedInUserRole] = useState("2");
 
@@ -41,6 +42,12 @@ export default function CreateUser() {
         },
         validationSchema: userValidationSchema
     });
+
+    function setMsg(val){
+        setMessage(val);
+        const notiAudio = new Audio(notiSound);
+        notiAudio.play();
+    }
 
     const createUser = async (data) => {
 

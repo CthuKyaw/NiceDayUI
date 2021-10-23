@@ -7,24 +7,14 @@ import { Button, Alert, Stack } from '@mui/material';
 import axios from "axios";
 import { useAuth } from '../../context/auth-context';
 import { Redirect } from 'react-router';
-
-
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-import Link from '@mui/material/Link';
-
-
-//const currentUser = { "ID": 1, "User_Id": "U001", "Pass": "dolphins", "Status": 0 };
+import notiSound from '../../sounds/notification-sound.wav';
 
 export default function Dashboard() {
 
     const { loggedIn, getCurrentUser } = useAuth();
     const [dataList, setDataList] = useState(null);
     const [openModal, setOpenModal] = useState(false);
-    const [msg, setMsg] = useState("");
+    const [msg, setMessage] = useState("");
     const [reqStatus, setReqStatus] = useState(false);
     
 
@@ -35,6 +25,11 @@ export default function Dashboard() {
     }, [])
 
     
+    function setMsg(val){
+        setMessage(val);
+        const notiAudio = new Audio(notiSound);
+        notiAudio.play();
+    }
 
     async function getData() {
         
