@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { useContext,useEffect,useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -25,12 +25,12 @@ import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import MessageIcon from '@mui/icons-material/MessageRounded';
 import LogoutIcon from '@mui/icons-material/Logout';
 import Avatar from '@mui/material/Avatar';
-import { deepOrange, deepPurple} from '@mui/material/colors';
-
-import CreateUser from '../create-user/CreateUser';
-import { Redirect, Route, Router, useHistory } from 'react-router';
+import { deepOrange, deepPurple, grey } from '@mui/material/colors';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
-import { Switch } from '@mui/material';
+import { Chip, Stack, Switch } from '@mui/material';
 import { useAuth } from '../../context/auth-context';
 import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
 
@@ -86,14 +86,26 @@ export default function SideDrawer() {
   const [open, setOpen] = React.useState(false);
   const history = useHistory();
   const { logout, loggedIn, getCurrentUser } = useAuth();
-  const [profileInfo,setProfileInfo] = useState();
+  const [profileInfo, setProfileInfo] = useState();
 
-  useEffect(()=>{
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+
+  const openMenu = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  useEffect(() => {
     let user = getCurrentUser();
-    if(user){
-      setProfileInfo(`${user.data.user_name} (${user.data.role < 2?"Admin":"User"})`);
+    if (user) {
+      setProfileInfo(`${user.data.user_name} (${user.data.role < 2 ? "Admin" : "User"})`);
     }
-  },[])
+  }, [])
 
 
   const handleDrawerOpen = () => {
@@ -128,14 +140,33 @@ export default function SideDrawer() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap sx={{ flexGrow: 1 }} component="div">
-            Fittness & Maddness
+            Workout Everyday
           </Typography>
-          <Tooltip title={profileInfo}>
-          <Avatar className="avatarHover"
-            sx={{ bgcolor: deepOrange[500] }}>{getCurrentUser().data?.user_name.substring(0, 2)}
-          </Avatar>
-          </Tooltip>
-          
+          <div>
+            <IconButton
+              id="basic-button"
+              aria-controls="basic-menu"
+              aria-haspopup="true"
+              aria-expanded={openMenu ? 'true' : undefined}
+              onClick={handleClick}
+            >
+              <Chip className="avatarHover" label={getCurrentUser().data?.user_name}
+                sx={{ bgcolor: deepOrange[400], color: grey[100] }}>
+              </Chip>
+            </IconButton>
+            <Menu
+              id="basic-menu"
+              anchorEl={anchorEl}
+              open={openMenu}
+              onClose={handleClose}
+              MenuListProps={{
+                'aria-labelledby': 'basic-button',
+              }}
+            >
+
+              <MenuItem onClick={() => { logout() }}>Log out</MenuItem>
+            </Menu>
+          </div>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -152,9 +183,15 @@ export default function SideDrawer() {
         open={open}
       >
         <DrawerHeader>
+          <Tooltip title={profileInfo}>
+            <Avatar className="avatarHover"
+              sx={{ bgcolor: deepOrange[500] }}>{getCurrentUser().data?.user_name.substring(0, 2)}
+            </Avatar>
+          </Tooltip>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
           </IconButton>
+
         </DrawerHeader>
         <Divider />
         <List>
