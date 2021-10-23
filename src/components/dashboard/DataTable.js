@@ -14,10 +14,12 @@ import MessageOutlined from '@mui/icons-material/MessageOutlined';
 import Badge from '@mui/material/Badge';
 import InfoSharp from '@mui/icons-material/InfoSharp';
 import DataTableActionMenu from "./DataTableActionMenu";
+import { useAuth } from "../../context/auth-context";
 
 export default function DataTable({ results, onSuspend, loginUserRole }) {
 
   const [showAlert, setShowAlert] = useState(false);
+  const {getCurrentUser} = useAuth();
 
   function handleShowAlert(s) {
     setShowAlert(s);
@@ -104,7 +106,7 @@ export default function DataTable({ results, onSuspend, loginUserRole }) {
                           </Badge>
                         </IconButton>}
 
-                      { loginUserRole !== 2 &&
+                      { (loginUserRole !== 2 && getCurrentUser().data.id !== obj.UserId) &&
                         <DataTableActionMenu userId={obj.UserId}
                           activeStatus={obj.Active} onSuspend={onSuspend}>
                         </DataTableActionMenu>

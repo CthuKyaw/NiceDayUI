@@ -142,7 +142,7 @@ export default function Dashboard() {
                 {msg != "" && <Alert severity={`${reqStatus ? "success" : "error"}`}>{msg}</Alert>}
                 <br />
                 <Stack spacing={2} direction="row">
-                    <Button variant="contained" onClick={() => { submit(0) }}>Gym Day</Button>
+                    <Button variant="contained" onClick={() => { submit(0) }}>Register</Button>
                     <button><Popup variant="outlined" onSubmit={submit}></Popup></button>
                 </Stack>
                 <br />
