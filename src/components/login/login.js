@@ -41,7 +41,7 @@ const Login = () => {
         
         
         try {
-            axios.post("http://localhost:3000/api/users/login", payLoad).then((response) => {
+            axios.post("http://156.67.216.116/api/users/login", payLoad).then((response) => {
                 if (response.data.success > 0) {
                     setUser(response.data);
                     localStorage.setItem('user', JSON.stringify(response.data));
