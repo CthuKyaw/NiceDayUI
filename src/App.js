@@ -3,11 +3,11 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch, Link, HashRouter, BrowserRouter } from "react-router-dom";
 import { useAuth } from './context/auth-context';
 import Login from './components/login/login';
-//import {GuestRoute, UserRoute} from './routes'
 import NavBar from './components/layout/AppBar'
 import Layout from './components/layout/Layout'
 import CreateUser from './components/create-user/CreateUser';
 import Dashboard from './components/dashboard/dashboard';
+
 
 function App() {
   const { loggedIn, getCurrentUser } = useAuth();

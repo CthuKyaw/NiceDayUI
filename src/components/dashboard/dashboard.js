@@ -46,7 +46,7 @@ export default function Dashboard() {
             params: data 
         };
 
-        await axios.get("http://156.67.216.116/api/workout", config)
+        await axios.get(`${process.env.REACT_APP_API_HOST}/users/workout`, config)
             .then((response) => {
                 if (response.data.success > 0) {
                     setDataList(response.data.rows);
@@ -80,7 +80,7 @@ export default function Dashboard() {
         let token = currentUser.token;
         const config = { headers: { Authorization: `Bearer ${token}` } };
 
-        await axios.patch("http://156.67.216.116/api/users/suspend", data, config)
+        await axios.patch(`${process.env.REACT_APP_API_HOST}/users/suspend`, data, config)
             .then((response) => {
                 if (response.data.success > 0) {
                     setReqStatus(true);
@@ -115,7 +115,7 @@ export default function Dashboard() {
         let token = currentUser.token;
         const config = { headers: { Authorization: `Bearer ${token}` } };
 
-        await axios.post("http://156.67.216.116/api/workout", data, config)
+        await axios.post(`${process.env.REACT_APP_API_HOST}/users/workout`, data, config)
             .then((response) => {
                 if (response.data.success > 0) {
                     setReqStatus(true);

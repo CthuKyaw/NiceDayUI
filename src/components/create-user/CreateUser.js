@@ -67,7 +67,7 @@ export default function CreateUser() {
         let response;
 
         try {
-            response = await axios.post("http://156.67.216.116/api/users/", payLoad, config)
+            response = await axios.post(`${process.env.REACT_APP_API_HOST}/users`, payLoad, config)
                 .catch((err) => {
                     throw err;
                 });
