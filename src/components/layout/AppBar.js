@@ -199,7 +199,8 @@ export default function SideDrawer() {
             <ListItemIcon>
               <HomeIcon />
             </ListItemIcon>
-            <Link to="/dashboard" style={{ textDecoration: 'none' }} onClick={handleMenuClick}>Dashboard</Link>
+            <Link to="/dashboard" style={{ textDecoration: 'none' }} 
+            onClick={handleMenuClick}>Dashboard</Link>
 
           </ListItem>
           {getCurrentUser().data.role < 2 &&
@@ -208,7 +209,8 @@ export default function SideDrawer() {
               <ListItemIcon>
                 <PersonAddIcon />
               </ListItemIcon>
-              <Link to="/create" style={{ textDecoration: 'none' }} onClick={handleMenuClick}>Create Account</Link>
+              <Link to="/create" style={{ textDecoration: 'none' }} 
+              onClick={handleMenuClick}>Create Account</Link>
 
             </ListItem>}
 
@@ -216,7 +218,8 @@ export default function SideDrawer() {
             <ListItemIcon>
               <MessageIcon />
             </ListItemIcon>
-            <ListItemText primary={"Chat Room"} />
+            <Link to="/chatroom" style={{ textDecoration: 'none' }} 
+              onClick={handleMenuClick}>Chat Room</Link>
 
           </ListItem>
         </List>
