@@ -218,7 +218,7 @@ export default function SideDrawer() {
             <ListItemIcon>
               <MessageIcon />
             </ListItemIcon>
-            <Link to="/chatroom" style={{ textDecoration: 'none' }} 
+            <Link to="/chat" style={{ textDecoration: 'none' }} 
               onClick={handleMenuClick}>Chat Room</Link>
 
           </ListItem>

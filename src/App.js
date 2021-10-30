@@ -7,7 +7,8 @@ import NavBar from './components/layout/AppBar'
 import Layout from './components/layout/Layout'
 import CreateUser from './components/create-user/CreateUser';
 import Dashboard from './components/dashboard/dashboard';
-import ChatRoom from './components/video-chat/ChatRoom';
+import CreateRoom from './components/video-chat/CreateRoom';
+import Room from './components/video-chat/Room';
 
 
 function App() {
@@ -19,8 +20,8 @@ function App() {
       <Route exact path="/" component={Login}></Route>
       <Route exact path="/dashboard" component={Dashboard}></Route>
       <Route exact path="/create" component={CreateUser}></Route>
-      <Route exact path="/chatroom" component={ChatRoom}></Route>
-
+      <Route exact path="/chat" component={CreateRoom}></Route>
+      <Route path="/room/:roomID" component={Room} />
       </Layout>
   )
 }
