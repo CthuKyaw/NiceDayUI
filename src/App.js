@@ -21,7 +21,7 @@ function App() {
       <Route exact path="/dashboard" component={Dashboard}></Route>
       <Route exact path="/create" component={CreateUser}></Route>
       <Route exact path="/chat" component={CreateRoom}></Route>
-      <Route path="/room/:roomID" component={Room} />
+      <Route exact path="/room/:roomID" component={Room} />
       </Layout>
   )
 }
